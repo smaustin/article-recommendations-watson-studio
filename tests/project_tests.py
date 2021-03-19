@@ -1,6 +1,10 @@
+from pathlib import Path
+import sys
 import pandas as pd
 import numpy as np
 import pickle
+
+path = Path(__file__).parent.resolve()
 
 df = pd.read_csv('data/user-item-interactions.csv')
 df_content = pd.read_csv('data/articles_community.csv')
@@ -36,7 +40,7 @@ def sol_2_test(top_articles):
     
     checks = ['top_5', 'top_10', 'top_20']
     for idx, file in enumerate(checks):
-        if set(eval(file)) == set(pickle.load(open( "{}.p".format(file), "rb" ))):
+        if set(eval(file)) == set(pickle.load(open( "{}.p".format(path/file), "rb" ))):
             print("Your {} looks like the solution list! Nice job.".format(file))
         else:
             print("Oops! The {} list doesn't look how we expected.  Try again.".format(file))
